@@ -29,7 +29,7 @@
               stroke-width="1.1"
               stroke-linejoin="round"></path>
           </svg>
-          dark
+          <span class="theme-toggle__text">dark</span>
         </span>
         <span class="theme-toggle__state theme-toggle__state--to-light">
           <svg width="13" height="13" viewBox="0 0 13 13" aria-hidden="true">
@@ -40,7 +40,7 @@
               stroke-width="1.1"
               stroke-linecap="round"></path>
           </svg>
-          light
+          <span class="theme-toggle__text">light</span>
         </span>
       </button>
     </nav>
@@ -172,10 +172,16 @@
       gap: 16px;
       font-size: 14px;
     }
+    /* Icon-only round toggle on phones */
     .theme-toggle {
-      height: 32px;
-      padding: 0 12px;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      padding: 0;
       margin-left: 0;
+    }
+    .theme-toggle__text {
+      display: none;
     }
   }
 </style>

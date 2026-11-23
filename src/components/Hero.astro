@@ -1,6 +1,3 @@
----
-import BrainLine from './BrainLine.astro';
----
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="container">
@@ -13,7 +10,7 @@ import BrainLine from './BrainLine.astro';
       <h1 id="hero-title" class="hero__title">
         I design things you don’t have to <em>think</em> about.
       </h1>
-      <div class="hero__brain"><BrainLine /></div>
+      <div class="hero__brain" role="img" aria-label="Line drawing of a brain"></div>
     </div>
 
     <div class="hero__bottom">
@@ -38,7 +35,6 @@ import BrainLine from './BrainLine.astro';
 <style>
   .hero {
     padding-block: 112px 100px;
-    border-bottom: 1px solid var(--line);
   }
 
   .hero__meta {
@@ -76,17 +72,15 @@ import BrainLine from './BrainLine.astro';
     color: var(--accent);
   }
 
+  /* The drawing is a transparent PNG used as a mask,
+     so the line takes the current text colour in both themes. */
   .hero__brain {
     width: clamp(180px, 22vw, 300px);
-    height: auto;
+    aspect-ratio: 921 / 780;
     margin-right: 10px;
-    color: var(--text);
-  }
-
-  .hero__brain :global(svg) {
-    display: block;
-    width: 100%;
-    height: auto;
+    background-color: var(--text);
+    -webkit-mask: url('/brain.png') center / contain no-repeat;
+    mask: url('/brain.png') center / contain no-repeat;
   }
 
   .hero__bottom {
@@ -163,9 +157,8 @@ import BrainLine from './BrainLine.astro';
       grid-template-columns: 1fr;
     }
     .hero__brain {
-      order: -1;
       width: 160px;
-      justify-self: end;
+      justify-self: center;
       margin-right: 0;
     }
     .hero__bottom {

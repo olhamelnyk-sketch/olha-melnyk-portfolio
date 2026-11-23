@@ -1,0 +1,87 @@
+---
+// TODO: add real links (email, LinkedIn, Behance profile) and put cv.pdf into /public.
+const links = [
+  { label: 'Email', href: '#contact' },
+  { label: 'LinkedIn', href: '#contact' },
+  { label: 'Behance', href: '#contact' },
+  { label: 'Download CV', href: '/cv.pdf', download: true },
+];
+---
+
+<section id="contact" class="section" aria-labelledby="contact-title">
+  <div class="container">
+    <div class="section__inner contact">
+      <h2 id="contact-title" class="contact__title">
+        Open to Junior UX/UI <br class="contact__br" /><span class="accent-serif">Designer</span> roles.
+      </h2>
+
+      <p class="contact__text">Product companies and digital agencies · Tallinn, remote or hybrid</p>
+
+      <ul class="contact__links">
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href} download={link.download}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding-bottom: 120px !important;
+  }
+
+  .contact__title {
+    margin: 20px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(44px, 6vw, 84px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.05em;
+  }
+
+  .contact__title .accent-serif {
+    margin-left: -0.04em;
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .contact__br {
+      display: none;
+    }
+  }
+
+  .contact__text {
+    margin: 44px 0 0;
+    font-size: 16px;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+  }
+
+  .contact__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 40px;
+    margin: 56px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .contact__links a {
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--accent);
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    transition: color 0.2s ease;
+  }
+
+  .contact__links a:hover {
+    color: var(--accent);
+  }
+</style>

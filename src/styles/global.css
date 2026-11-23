@@ -119,3 +119,59 @@ a {
     transition: none !important;
   }
 }
+
+/* ---------- Shared section styles ---------- */
+.section {
+  padding-block: 0;
+}
+
+.section > .container > .section__inner {
+  padding-block: 110px;
+  border-top: 1px solid var(--line);
+}
+
+.section__label {
+  margin: 0 0 72px;
+  font-family: var(--font-body);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.num {
+  display: block;
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 1;
+  color: var(--text-muted);
+}
+
+.accent-serif {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 640px) {
+  .section > .container > .section__inner {
+    padding-block: 72px;
+  }
+  .section__label {
+    margin-bottom: 44px;
+    font-size: 22px;
+  }
+  .num {
+    font-size: 36px;
+  }
+}
+
+/* Keep anchored sections clear of the sticky header */
+[id] {
+  scroll-margin-top: var(--nav-height);
+}
