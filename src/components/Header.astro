@@ -1,0 +1,181 @@
+---
+// Top navigation: name on the left, links + theme switch on the right.
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="logo" aria-label="Olha Melnyk — home">
+      <span>Olha</span>
+      <span>Melnyk</span>
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      <a href="#work">work</a>
+      <a href="#about">about</a>
+      <a href="/cv.pdf" download class="nav__cv">
+        CV
+        <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+          <path d="M6 1v7M3 5.5 6 8.5l3-3M2 11h8" fill="none" stroke="currentColor" stroke-width="1.2" />
+        </svg>
+      </a>
+
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch colour theme">
+        <span class="theme-toggle__state theme-toggle__state--to-dark">
+          <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+            <path
+              d="M10.5 7.4A4.6 4.6 0 0 1 4.6 1.5 4.6 4.6 0 1 0 10.5 7.4Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.1"
+              stroke-linejoin="round"></path>
+          </svg>
+          dark
+        </span>
+        <span class="theme-toggle__state theme-toggle__state--to-light">
+          <svg width="13" height="13" viewBox="0 0 13 13" aria-hidden="true">
+            <circle cx="6.5" cy="6.5" r="2.3" fill="none" stroke="currentColor" stroke-width="1.1"></circle>
+            <path
+              d="M6.5 .8v1.6M6.5 10.6v1.6M.8 6.5h1.6M10.6 6.5h1.6M2.5 2.5l1.1 1.1M9.4 9.4l1.1 1.1M2.5 10.5l1.1-1.1M9.4 3.6l1.1-1.1"
+              stroke="currentColor"
+              stroke-width="1.1"
+              stroke-linecap="round"></path>
+          </svg>
+          light
+        </span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const root = document.documentElement;
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+
+  const currentTheme = () => root.dataset.theme || (media.matches ? 'dark' : 'light');
+
+  document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const next = currentTheme() === 'dark' ? 'light' : 'dark';
+      root.classList.add('theme-transition');
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch (e) {}
+      window.setTimeout(() => root.classList.remove('theme-transition'), 500);
+    });
+  });
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header__inner {
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+    font-size: 21px;
+    line-height: 1.15;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+  }
+
+  .nav a {
+    transition: color 0.2s ease;
+  }
+
+  .nav a:hover {
+    color: var(--accent);
+  }
+
+  .nav__cv {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    height: 36px;
+    padding: 0 16px;
+    margin-left: 4px;
+    border: 1px solid var(--text);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    letter-spacing: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .theme-toggle__state {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Show "dark" in light mode, "light" in dark mode */
+  .theme-toggle__state--to-light {
+    display: none;
+  }
+  :global(:root[data-theme='dark']) .theme-toggle__state--to-dark {
+    display: none;
+  }
+  :global(:root[data-theme='dark']) .theme-toggle__state--to-light {
+    display: inline-flex;
+  }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .theme-toggle__state--to-dark {
+      display: none;
+    }
+    :global(:root:not([data-theme='light'])) .theme-toggle__state--to-light {
+      display: inline-flex;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .header__inner {
+      height: 72px;
+    }
+    .logo {
+      font-size: 17px;
+    }
+    .nav {
+      gap: 16px;
+      font-size: 14px;
+    }
+    .theme-toggle {
+      height: 32px;
+      padding: 0 12px;
+      margin-left: 0;
+    }
+  }
+</style>
